@@ -71,9 +71,8 @@ Expected output:
 ├── init.sh
 ├── requirements.txt
 ├── scripts/
-│   ├── scrape_yahoo.py
-│   ├── scrape_wsj.py
-├── data/
+│   ├── Makefile
+├── sample_data/
 │   ├── ygainers.html
 │   ├── ygainers.csv
 │   ├── wjsgainers.html
