@@ -1,0 +1,8 @@
+google-chrome-stable_current_amd64.deb
+google-chrome-stable_current_amd64.deb
+google-chrome-stable_current_amd64.deb
+
+# Ignore Python virtual environment
+env/
+*.pyc
+__pycache__/
