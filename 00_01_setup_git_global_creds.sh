@@ -1,7 +1,7 @@
 !#/usr/bin/bash
 
-USER=efrainolivaresuva@gmail.com
-NAME=EfrainOlivaresUVA
+USER=christian.ollen@gmail.com
+NAME=collen6
 
 git config --global --list
 
