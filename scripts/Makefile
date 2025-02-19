@@ -19,7 +19,7 @@ env:
 # Install dependencies inside the virtual environment
 update: env
 	@echo "Activating virtual environment and installing dependencies..."
-	@source $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
+	@.  $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
 	@echo "Dependencies installed."
 
 # Fetch Yahoo Finance gainers (HTML)
