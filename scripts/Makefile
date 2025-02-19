@@ -19,7 +19,7 @@ env:
 # Install dependencies inside the virtual environment
 update: env
 	@echo "Activating virtual environment and installing dependencies..."
-	@source $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
+	@.  $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
 	@echo "Dependencies installed."
 
 # Fetch Yahoo Finance gainers (HTML)
@@ -47,3 +47,15 @@ $(DATA_DIR)/wjsgainers.csv: $(DATA_DIR)/wjsgainers.html
 	@echo "Converting WSJ gainers to CSV..."
 	python -c "import pandas as pd; raw = pd.read_html('$(DATA_DIR)/wjsgainers.html'); raw[0].to_csv('$(DATA_DIR)/wjsgainers.csv', index=False)"
 	@echo "Saved WSJ gainers to $(DATA_DIR)/wjsgainers.csv."
+
+lint:
+	echo "Running pylint..."
+	$(VENV_DIR)/bin/pylint $(PYTHON_FILES)
+
+test:
+	$(VENV_DIR)/bin/pytest -vv tests/
+
+lint_and_test: lint test
+
+normalize:
+	@$(VENV_DIR)/bin/python bin/csv_normalizer.py
