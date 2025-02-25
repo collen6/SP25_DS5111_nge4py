@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11"]  # Testing on multiple Python versions
+        python-version: ["3.10", "3.11"]  # Test multiple Python versions
 
     steps:
       - name: Checkout Repository
@@ -30,24 +30,11 @@ jobs:
       - name: Run Linter (pylint)
         run: |
           source env/bin/activate
+          cd scripts  # Navigate to the correct directory
           make lint
 
       - name: Run Tests (pytest)
         run: |
           source env/bin/activate
+          cd scripts  # Navigate to the correct directory
           make test
-
-      - name: Check OS
-        run: |
-          if [[ "$OSTYPE" != "linux-gnu"* ]]; then
-            echo "Error: OS is not Linux!"
-            exit 1
-          fi
-
-      - name: Check Python Version
-        run: |
-          PYTHON_VERSION=$(python --version 2>&1)
-          if [[ "$PYTHON_VERSION" != "Python 3.10"* ]] && [[ "$PYTHON_VERSION" != "Python 3.11"* ]]; then
-            echo "Error: Python version is not 3.10 or 3.11!"
-            exit 1
-          fi
