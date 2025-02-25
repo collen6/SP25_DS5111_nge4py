@@ -97,5 +97,7 @@ git push origin main
 
 Now you can use make to automate tasks and process data efficiently. 
 
+![Test Status](https://github.com/collen6/25SP_DS5111/actions/workflows/validations.yml/badge.svg)
+
 🚀# SP25_DS5111_nge4py
 DS 5111 Repo
