@@ -1,4 +1,5 @@
 # Define folders
+PYTHON_FILES=$(shell find . -type f -name "*.py" ! -path "./env/*")
 VENV_DIR=../env
 DATA_DIR=../sample_data
 
@@ -19,7 +20,7 @@ env:
 # Install dependencies inside the virtual environment
 update: env
 	@echo "Activating virtual environment and installing dependencies..."
-	@.  $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
+	@source  $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
 	@echo "Dependencies installed."
 
 # Fetch Yahoo Finance gainers (HTML)
@@ -50,10 +51,10 @@ $(DATA_DIR)/wjsgainers.csv: $(DATA_DIR)/wjsgainers.html
 
 lint:
 	echo "Running pylint..."
-	$(VENV_DIR)/bin/pylint $(PYTHON_FILES)
+	$(VENV_DIR)/bin/pylint /home/ubuntu/SP25_DS5111_nge4py/bin/*.py
 
 test:
-	$(VENV_DIR)/bin/pytest -vv tests/
+	$(VENV_DIR)/bin/pytest -vv /home/ubuntu/SP25_DS5111_nge4py/tests
 
 lint_and_test: lint test
 
