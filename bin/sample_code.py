@@ -4,6 +4,7 @@ This module provides a function to plot a regression line.
 
 import matplotlib.pyplot as plt  # Ensure plt is imported
 
+
 def plot_regression_line(x, y, b):
     """
     Plots a regression line based on input x, y values, and coefficients.
