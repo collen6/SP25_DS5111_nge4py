@@ -9,6 +9,7 @@ import os
 import sys
 import logging
 
+
 def setup_logging():
     """
     Set up logging configuration.
@@ -36,11 +37,11 @@ def normalize_csv(input_file):
     assert os.path.exists(input_file), f"File not found: {input_file}"
 
     output_file = input_file.replace(".csv", "_norm.csv")
-    expected_headers = ["symbol", "price", "price_change", "price_percent_change"]
+    expected_headers = ["symbol", "price",
+                        "price_change", "price_percent_change"]
     normalized_data = []
 
-    logging.info("Processing file: %s", input_file)
-
+    logging.info(f"Processing file: {input_file}")
     with open(input_file, mode='r', newline='', encoding='utf-8') as infile:
         reader = csv.DictReader(infile)
         headers = reader.fieldnames
@@ -56,16 +57,20 @@ def normalize_csv(input_file):
                 "price_percent_change": row.get("% Change") or row.get("price_percent_change"),
             }
 
-            # Ensure no missing values
-            assert all(normalized_row.values()), f"Missing values in row: {normalized_row}"
+       	    assert all(normalized_row.values()), f"Missing values in row: {normalized_row}"
             normalized_data.append(normalized_row)
+            )
 
     with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
         writer = csv.DictWriter(outfile, fieldnames=expected_headers)
         writer.writeheader()
         writer.writerows(normalized_data)
 
+<<<<<<< HEAD
+    logging.info(f"Normalized file saved: {output_file}")
+=======
     logging.info("Normalized file saved: %s", output_file)
+>>>>>>> bc920dcc2f4f04805a20c0ca8e7c6a436d8dccb8
     return output_file
 
 
@@ -76,7 +81,8 @@ def main():
     setup_logging()
 
     if len(sys.argv) != 2:
-        logging.error("Usage: python bin/normalize_csv.py sample_data/<csv_filename>")
+        logging.error(
+            "Usage: python bin/normalize_csv.py sample_data/<csv_filename>")
         sys.exit(1)
 
     input_path = sys.argv[1]
