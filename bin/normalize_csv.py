@@ -1,3 +1,9 @@
+"""
+normalize_csv.py
+
+This module contains functions for normalizing CSV files.
+"""
+
 import csv
 import os
 import sys
@@ -5,6 +11,9 @@ import logging
 
 
 def setup_logging():
+    """
+    Set up logging configuration.
+    """
     logging.basicConfig(
         format='%(asctime)s - %(levelname)s - %(message)s',
         level=logging.INFO
@@ -33,7 +42,6 @@ def normalize_csv(input_file):
     normalized_data = []
 
     logging.info(f"Processing file: {input_file}")
-
     with open(input_file, mode='r', newline='', encoding='utf-8') as infile:
         reader = csv.DictReader(infile)
         headers = reader.fieldnames
@@ -49,21 +57,27 @@ def normalize_csv(input_file):
                 "price_percent_change": row.get("% Change") or row.get("price_percent_change"),
             }
 
-            assert all(normalized_row.values()), (
-                f"Missing values in row: {normalized_row}"
-            )
+       	    assert all(normalized_row.values()), f"Missing values in row: {normalized_row}"
             normalized_data.append(normalized_row)
+            )
 
     with open(output_file, mode='w', newline='', encoding='utf-8') as outfile:
         writer = csv.DictWriter(outfile, fieldnames=expected_headers)
         writer.writeheader()
         writer.writerows(normalized_data)
 
+<<<<<<< HEAD
     logging.info(f"Normalized file saved: {output_file}")
+=======
+    logging.info("Normalized file saved: %s", output_file)
+>>>>>>> bc920dcc2f4f04805a20c0ca8e7c6a436d8dccb8
     return output_file
 
 
 def main():
+    """
+    Main entry point for the script. Handles command-line arguments and calls normalize_csv().
+    """
     setup_logging()
 
     if len(sys.argv) != 2:

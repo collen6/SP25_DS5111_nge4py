@@ -1,5 +1,9 @@
 # Define folders
+<<<<<<< HEAD
 PYTHON_FILES := $(shell find ../bin -name "*.py")
+=======
+PYTHON_FILES=$(shell find . -type f -name "*.py" ! -path "./env/*")
+>>>>>>> bc920dcc2f4f04805a20c0ca8e7c6a436d8dccb8
 VENV_DIR=../env
 DATA_DIR=../sample_data
 
@@ -20,7 +24,7 @@ env:
 # Install dependencies inside the virtual environment
 update: env
 	@echo "Activating virtual environment and installing dependencies..."
-	@.  $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
+	@source  $(VENV_DIR)/bin/activate && python -m pip install --upgrade pip && pip install -r ../requirements.txt
 	@echo "Dependencies installed."
 
 gainers:
@@ -29,12 +33,12 @@ gainers:
 
 # Lint the code with pylint
 lint:
-	@echo "Running pylint..."
-	$(VENV_DIR)/bin/pylint $(PYTHON_FILES)
+	echo "Running pylint..."
+	$(VENV_DIR)/bin/pylint /home/ubuntu/SP25_DS5111_nge4py/bin/*.py
 
 # Run tests
 test:
-	PYTHONPATH=.. $(VENV_DIR)/bin/pytest -vv ../tests/
+	$(VENV_DIR)/bin/pytest -vv /home/ubuntu/SP25_DS5111_nge4py/tests
 
 # Run lint and tests together
 lint_and_test: lint test
